@@ -1,0 +1,35 @@
+# Web framework
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+python-multipart==0.0.9
+
+# Database
+sqlalchemy==2.0.35
+psycopg2-binary==2.9.9
+alembic==1.13.3
+
+# Config
+pydantic==2.9.2
+pydantic-settings==2.5.2
+python-dotenv==1.0.1
+
+# ML - Classification
+scikit-learn==1.5.2
+joblib==1.4.2
+pandas==2.2.3
+numpy==1.26.4
+
+# ML - Embeddings + Vector DB
+sentence-transformers==3.1.1
+chromadb==0.5.20
+
+# LLM
+groq==0.11.0
+
+# Frontend
+streamlit==1.39.0
+plotly==5.24.1
+requests==2.32.3
+
+# Utilities
+python-dateutil==2.9.0
