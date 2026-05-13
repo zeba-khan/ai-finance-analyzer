@@ -110,7 +110,13 @@ def _load_or_train() -> Pipeline:
 
 
 # Load once at module import — not per request
-_pipeline: Pipeline = _load_or_train()
+_pipeline = None
+
+def get_pipeline() -> Pipeline:
+    global _pipeline
+    if _pipeline is None:
+        _pipeline = _load_or_train()
+    return _pipeline
 
 CATEGORIES = sorted(set(labels))
 
@@ -120,9 +126,9 @@ def predict_category(description: str) -> tuple[str, float]:
     clean = re.sub(r"[^a-zA-Z\s]", " ", description.lower()).strip()
     if not clean:
         return "uncategorized", 0.0
-    proba = _pipeline.predict_proba([clean])[0]
+    proba = get_pipeline().predict_proba([clean])[0]
     idx = proba.argmax()
-    category = _pipeline.classes_[idx]
+    category = get_pipeline().classes_[idx]
     confidence = round(float(proba[idx]) * 100, 2)  # type: ignore[import]
     return category, confidence
 
