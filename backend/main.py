@@ -16,11 +16,13 @@ from app.routes.sms import router as sms_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup: create tables
-    Base.metadata.create_all(bind=engine)
-    print("[OK] Database tables ready")
+    try:
+        Base.metadata.create_all(bind=engine)
+        print("[OK] Database tables ready")
+    except Exception as e:
+        print(f"[ERROR] Startup failed: {e}")
+        raise
     yield
-    # Shutdown: cleanup if needed
     print("[STOP] Shutting down")
 
 
