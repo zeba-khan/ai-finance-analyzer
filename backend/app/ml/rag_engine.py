@@ -13,8 +13,14 @@ from app.config import settings # type: ignore[import]
 CHROMA_PATH = os.path.join(os.path.dirname(__file__), "chroma_store")
 COLLECTION_NAME = "transactions"
 
-# Load embedding model once
-_embedder = SentenceTransformer("all-MiniLM-L6-v2")
+# Load embedding model lazily
+_embedder = None
+
+def get_embedder():
+    global _embedder
+    if _embedder is None:
+        _embedder = SentenceTransformer("all-MiniLM-L6-v2")
+    return _embedder
 
 # ChromaDB persistent client
 _chroma_client = chromadb.PersistentClient(
@@ -40,7 +46,7 @@ def _make_document(tx: dict) -> str:
 def upsert_transaction(tx: dict) -> None:
     """Embed and upsert a single transaction into ChromaDB."""
     doc = _make_document(tx)
-    embedding = _embedder.encode(doc).tolist()
+    embedding = get_embedder().encode(doc).tolist()
     _collection.upsert(
         ids=[str(tx["id"])],
         documents=[doc],
@@ -58,7 +64,7 @@ def upsert_many(transactions: list[dict]) -> None:
     if not transactions:
         return
     docs = [_make_document(tx) for tx in transactions]
-    embeddings = _embedder.encode(docs).tolist()
+    embeddings = get_embedder().encode(docs).tolist()
     _collection.upsert(
         ids=[str(tx["id"]) for tx in transactions],
         documents=docs,
@@ -92,7 +98,7 @@ def query(user_question: str, n_results: int = 8) -> str:
     if count == 0:
         return "No transactions found in the database. Please upload or add some transactions first.", 0  # type: ignore[import]
 
-    question_embedding = _embedder.encode(user_question).tolist()
+    question_embedding = get_embedder().encode(user_question).tolist()
     results = _collection.query(
         query_embeddings=[question_embedding],
         n_results=min(n_results, count),
