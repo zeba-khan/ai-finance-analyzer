@@ -1,5 +1,10 @@
 # 💰 AI Finance Analyzer
 
+![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-green?logo=fastapi)
+![Streamlit](https://img.shields.io/badge/Streamlit-Frontend-red?logo=streamlit)
+![License](https://img.shields.io/badge/License-MIT-yellow)
+
 > A full-stack AI-powered personal finance tracker with ML category prediction, anomaly detection, and a RAG-based conversational AI assistant — built with FastAPI, PostgreSQL, scikit-learn, ChromaDB, and Groq LLM.
 
 ---
@@ -77,7 +82,7 @@
 ### 1. Clone & setup
 
 ```bash
-git clone https://github.com/yourusername/ai-finance-analyzer
+git clone https://github.com/zeba-khan/ai-finance-analyzer
 cd ai-finance-analyzer
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
@@ -158,7 +163,7 @@ docker-compose up --build
 1. Push to GitHub
 2. Create a new **Web Service** on [render.com](https://render.com)
 3. Set build command: `pip install -r requirements.txt`
-4. Set start command: `cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT`
+4. Set start command:  uvicorn main:app --host 0.0.0.0 --port $PORT
 5. Add environment variables from your `.env`
 6. Create a free PostgreSQL database on Render and link it
 
@@ -170,7 +175,8 @@ docker-compose up --build
 ai-finance-analyzer/
 ├── backend/
 │   ├── main.py                    # FastAPI app entry point
-│   ├── .env                       # Environment variables
+│   ├── requirements.txt           # Python dependencies
+│   ├── .env                       # Environment variables (never commit!)
 │   └── app/
 │       ├── config.py              # Settings (pydantic-settings)
 │       ├── database.py            # SQLAlchemy engine + session
@@ -193,10 +199,10 @@ ai-finance-analyzer/
 │       └── utils/
 │           └── csv_parser.py      # Multi-format CSV parser
 ├── streamlit_app.py               # Full frontend (5 pages)
-├── requirements.txt
 ├── Dockerfile.backend
 ├── Dockerfile.frontend
 └── docker-compose.yml
+
 ```
 
 ---
