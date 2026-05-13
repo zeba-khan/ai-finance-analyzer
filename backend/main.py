@@ -1,3 +1,9 @@
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = ""
+os.environ["ORT_LOGGING_LEVEL"] = "3"
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+os.environ["OMP_NUM_THREADS"] = "1"
+
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request  # type: ignore[import]
 from fastapi.middleware.cors import CORSMiddleware
