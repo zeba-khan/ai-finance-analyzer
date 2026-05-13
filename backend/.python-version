@@ -1,0 +1,2 @@
+cd C:\Users\Admin\AI_finance_analyzer\backend
+echo 3.11.0 > .python-version
