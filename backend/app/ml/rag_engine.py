@@ -3,6 +3,8 @@ RAG (Retrieval-Augmented Generation) engine.
 Embeds transactions → stores in ChromaDB → retrieves context → answers via Groq LLM.
 """
 import os
+os.environ["CUDA_VISIBLE_DEVICES"] = ""
+import os
 import json
 import chromadb  # type: ignore[import]
 from chromadb.config import Settings as ChromaSettings
