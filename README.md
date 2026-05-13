@@ -10,7 +10,7 @@
 ---
 
 ## 🚀 Live Demo
-[Deploy link here after Render deployment]
+*Coming soon — run locally with Docker (see Quick Start below)*
 
 ---
 
