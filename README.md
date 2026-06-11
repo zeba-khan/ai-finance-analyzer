@@ -9,7 +9,7 @@
 
 ---
 
-## 🚀 Live Demo
+## 🚀 Live Demo  
 *Coming soon — run locally with Docker (see Quick Start below)*
 
 ---
@@ -209,3 +209,4 @@ ai-finance-analyzer/
 
 ## 📄 License
 MIT
+"." 
