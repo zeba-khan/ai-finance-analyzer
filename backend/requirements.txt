@@ -20,6 +20,8 @@ pandas==2.2.3
 numpy==1.26.4
 
 # ML - Embeddings + Vector DB
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.5.1+cpu
 sentence-transformers==3.1.1
 chromadb==0.5.20
 
