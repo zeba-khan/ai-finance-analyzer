@@ -31,6 +31,18 @@ def get_all(db: Session) -> list[Transaction]:
 def get_by_id(db: Session, tx_id: int) -> Transaction | None:
     return db.query(Transaction).filter(Transaction.id == tx_id).first()
 
+def duplicate_exists(
+    db: Session,
+    description: str,
+    amount: float,
+    date: datetime,
+) -> bool:
+    return db.query(Transaction).filter(
+        Transaction.description == description,
+        Transaction.amount == amount,
+        Transaction.date == date,
+    ).first() is not None   
+
 
 def update(db: Session, tx: Transaction, **fields) -> Transaction:
     for key, val in fields.items():

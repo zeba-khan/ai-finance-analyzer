@@ -10,4 +10,4 @@ uploads/
 *.egg-info/
 dist/
 build/
-"*.db" 
+*.db

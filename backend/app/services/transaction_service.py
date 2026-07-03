@@ -92,6 +92,14 @@ def bulk_import(db: Session, rows: list[dict]) -> tuple[int, int]:
 
     for row in rows:
         try:
+            if crud.duplicate_exists(
+                db=db,
+                description=row["description"],
+                amount=row["amount"],
+                date=row.get("date"),
+            ):
+                skipped += 1
+                continue
             cat, conf = predict_category(row["description"])
             tx = crud.create(
                 db=db,
